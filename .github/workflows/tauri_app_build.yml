@@ -2,8 +2,8 @@ name: tauri_app_build
 
 on:
   push:
-    branches:    
-      - 'releases/**'
+    tags:
+      - 'v*'
 
 jobs:
   build:
