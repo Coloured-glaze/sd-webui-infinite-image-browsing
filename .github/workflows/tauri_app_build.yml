@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest,ubuntu-24.04]
+        os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -208,11 +208,6 @@ jobs:
         with:
           name: bundle-${{ env.VERSION }}-Windows
           path: artifacts
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: bundle-${{ env.VERSION }}-Linux
-          path: artifacts
         
       - uses: actions/download-artifact@v3
         with:
@@ -222,11 +217,6 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: iib_app_cli_Windows
-          path: artifacts
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: iib_app_cli_Linux
           path: artifacts
 
       - name: Release
