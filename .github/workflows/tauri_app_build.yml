@@ -5,11 +5,13 @@ on:
     tags:
       - 'v*'
 
+
+
 jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest,ubuntu-20.04]
+        os: [windows-latest,ubuntu-24.04]
 
     runs-on: ${{ matrix.os }}
 
@@ -182,7 +184,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4.4.0
         with:
-          name: bundle-${{ env.VERSION }}-${{ runner.os }}
+          name: bundle-${{ env.VERSION }}-${{ runner.os }}-pyinstaller
           path: |
             vue/src-tauri/target/release/bundle/nsis/Infinite Image Browsing_${{ env.VERSION }}_x64-setup-pyinstaller.exe
             
@@ -211,7 +213,12 @@ jobs:
         with:
           name: bundle-${{ env.VERSION }}-Linux
           path: artifacts
-      
+        
+      - uses: actions/download-artifact@v3
+        with:
+          name: bundle-${{ env.VERSION }}-Windows-pyinstaller 
+          path: artifacts
+
       - uses: actions/download-artifact@v3
         with:
           name: iib_app_cli_Windows
